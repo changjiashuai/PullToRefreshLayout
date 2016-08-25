@@ -1,16 +1,19 @@
-package io.github.changjiashuai.pulltorefreshlayout;
+package io.github.changjiashuai.pulltorefresh;
 
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.os.Build;
 import android.util.AttributeSet;
+import android.util.Log;
 
 /**
  * Email: changjiashuai@gmail.com
  *
  * Created by CJS on 16/8/25 11:46.
  */
-public class FooterView extends BaseView{
+public class FooterView extends BaseView {
+    private static final String TAG = "FooterView";
+
     public FooterView(Context context) {
         super(context);
     }
@@ -31,16 +34,16 @@ public class FooterView extends BaseView{
 
     @Override
     public void begin() {
-
+        Log.i(TAG, "begin: ");
     }
 
     @Override
-    public void refreshing(int progress) {
-
+    public void refreshing(float progress, float total) {
+//        Log.i(TAG, "refreshing: progress=" + progress + ", total=" + total);
     }
 
     @Override
     public void end() {
-
+        Log.i(TAG, "end: ");
     }
 }

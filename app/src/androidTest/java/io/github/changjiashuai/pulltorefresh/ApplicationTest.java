@@ -1,4 +1,4 @@
-package io.github.changjiashuai.pulltorefreshlayout;
+package io.github.changjiashuai.pulltorefresh;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

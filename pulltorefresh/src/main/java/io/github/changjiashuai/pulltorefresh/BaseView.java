@@ -1,4 +1,4 @@
-package io.github.changjiashuai.pulltorefreshlayout;
+package io.github.changjiashuai.pulltorefresh;
 
 import android.annotation.TargetApi;
 import android.content.Context;

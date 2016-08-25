@@ -1,4 +1,4 @@
-package io.github.changjiashuai.pulltorefreshlayout;
+package io.github.changjiashuai.pulltorefresh;
 
 import org.junit.Test;
 
