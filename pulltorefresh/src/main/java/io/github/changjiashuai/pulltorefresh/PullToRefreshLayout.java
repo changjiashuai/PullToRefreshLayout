@@ -282,6 +282,10 @@ public class PullToRefreshLayout extends FrameLayout {
         mValueAnimator.start();
     }
 
+    public void autoRefresh(){
+            startRefresh(0, mHeaderHeight);
+    }
+
     public void endRefresh() {
         if (mHeaderView != null && mHeaderView.getLayoutParams().height > 0 && mRefreshing) {
             endRefresh(mHeaderHeight);

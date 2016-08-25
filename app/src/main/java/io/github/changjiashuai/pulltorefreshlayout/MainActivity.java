@@ -44,6 +44,12 @@ public class MainActivity extends AppCompatActivity {
                 mPullToRefreshLayout.endLoadMore();
             }
         });
+        mRecyclerView.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                mPullToRefreshLayout.autoRefresh();
+            }
+        }, 500);
     }
 
     private void initData(){
