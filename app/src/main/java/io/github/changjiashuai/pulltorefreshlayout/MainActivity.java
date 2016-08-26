@@ -16,7 +16,7 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
     private PullToRefreshLayout mPullToRefreshLayout;
     private RecyclerView mRecyclerView;
-    private List<String> mStrings;
+    private StringAdapter mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
         mLinearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(mLinearLayoutManager);
         initData();
-        StringAdapter mAdapter = new StringAdapter(mStrings);
+        mAdapter = new StringAdapter(initData());
         mRecyclerView.setAdapter(mAdapter);
 
 //        View mHeaderView = LayoutInflater.from(this).inflate(R.layout.refresh_view, null);
@@ -40,14 +40,26 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onRefresh() {
                 Log.i(TAG, "onRefresh: ");
-                mPullToRefreshLayout.endRefresh();
+                mRecyclerView.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        mAdapter.setStrings(initData());
+                        mPullToRefreshLayout.endRefresh();
+                    }
+                }, 1000);
             }
         });
         mPullToRefreshLayout.setOnLoadMoreListener(new PullToRefreshLayout.OnLoadMoreListener() {
             @Override
             public void onLoadMore() {
                 Log.i(TAG, "onLoadMore: ");
-                mPullToRefreshLayout.endLoadMore();
+                mRecyclerView.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        mAdapter.insert(addData());
+                        mPullToRefreshLayout.endLoadMore();
+                    }
+                }, 1000);
             }
         });
         mRecyclerView.postDelayed(new Runnable() {
@@ -58,10 +70,19 @@ public class MainActivity extends AppCompatActivity {
         }, 500);
     }
 
-    private void initData(){
-        mStrings = new ArrayList<>();
-        for (int i=0;i<20;i++){
-            mStrings.add("Test String--"+i);
+    private List<String> initData() {
+        List<String> mStrings = new ArrayList<>();
+        for (int i = 0; i < 20; i++) {
+            mStrings.add("Test String--" + i);
         }
+        return mStrings;
+    }
+
+    private List<String> addData() {
+        List<String> testData = new ArrayList<>();
+        for (int i = 0; i < 20; i++) {
+            testData.add("Test Add String--" + i);
+        }
+        return testData;
     }
 }

@@ -21,7 +21,17 @@ public class StringAdapter extends RecyclerView.Adapter<StringAdapter.ViewHolder
         mStrings = strings;
     }
 
-//    public void insert()
+    public void setStrings(List<String> strings) {
+        mStrings = strings;
+        notifyDataSetChanged();
+    }
+
+    public void insert(List<String> strings){
+        int positionStart = mStrings.size();
+        int itemCount = strings.size();
+        mStrings.addAll(strings);
+        notifyItemRangeChanged(positionStart, itemCount);
+    }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {

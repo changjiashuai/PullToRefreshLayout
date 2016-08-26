@@ -357,6 +357,9 @@ public class PullToRefreshLayout extends FrameLayout {
 
     public void autoRefresh() {
         if (canRefresh) {
+            if (mHeaderView != null && mHeaderView instanceof PullToRefreshLayout.OnViewHeightListener) {
+                ((OnViewHeightListener) mHeaderView).begin();//开始动画
+            }
             startRefresh(0, mHeaderHeight);
         }
     }
