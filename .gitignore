@@ -1,4 +1,3 @@
-*.iml
 .gradle
 bintray.gradle
 gradle.properties
