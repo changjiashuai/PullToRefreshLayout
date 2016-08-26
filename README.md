@@ -8,7 +8,7 @@
 
 
 ## Demo
-<!--![avi](screenshots/avi.gif)-->
+![默认HeaderViewAndFooterView](screenshots/默认HeaderViewAndFooterView.gif)
 
 ## Usage
 
