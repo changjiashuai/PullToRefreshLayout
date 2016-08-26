@@ -8,13 +8,14 @@ import android.graphics.Paint;
 import android.os.Build;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.View;
 
 /**
  * Email: changjiashuai@gmail.com
  *
  * Created by CJS on 16/8/25 11:43.
  */
-public class HeaderView extends BaseView {
+public class HeaderView extends View implements PullToRefreshLayout.OnViewHeightListener {
     private static final String TAG = "HeaderView";
 
     public HeaderView(Context context) {
@@ -52,8 +53,8 @@ public class HeaderView extends BaseView {
     }
 
     @Override
-    public void refreshing(float progress, float total) {
-//        Log.i(TAG, "refreshing: progress=" + progress + ", total=" + total);
+    public void onHeight(float currentHeight, float maxHeight) {
+
     }
 
     @Override

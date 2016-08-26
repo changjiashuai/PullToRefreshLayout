@@ -28,14 +28,15 @@ public class PullToRefreshLayout extends FrameLayout {
     private boolean canRefresh = true;
     private boolean canLoadMore = true;
 
+    private OnViewHeightListener mOnViewHeightListener;
     private int mHeaderHeight = 100;    //default 100px
     private int mMaxHeaderHeight = 200; //default 200px=2*mHeaderHeight
     private int mFooterHeight = 100;
     private int mMaxFooterHeight = 200;
 
-    private BaseView mHeaderView;
+    private View mHeaderView;
     private View mChildView;
-    private BaseView mFooterView;
+    private View mFooterView;
     private float mCurrentY;
     private float mTouchY;
 
@@ -128,7 +129,10 @@ public class PullToRefreshLayout extends FrameLayout {
                     //处理下拉
                     if (dy > 0 && !canChildScrollUp()) {//到达顶部而且到达可以刷新的下拉View最小的高度
                         //开始下拉刷新
-                        mHeaderView.begin();
+                        if (mHeaderView instanceof OnViewHeightListener){
+                            mOnViewHeightListener = (OnViewHeightListener) mHeaderView;
+                            mOnViewHeightListener.begin();
+                        }
                         return true;
                     }
                 }
@@ -136,7 +140,10 @@ public class PullToRefreshLayout extends FrameLayout {
                     //处理上拉
                     if (dy < 0 && !canChildScrollDown()) {//到达低部而且到达可以上拉加载View最小的高度
                         //开始上拉加载
-                        mFooterView.begin();
+                        if (mFooterView instanceof OnViewHeightListener){
+                            mOnViewHeightListener = (OnViewHeightListener) mFooterView;
+                            mOnViewHeightListener.begin();
+                        }
                         return true;
                     }
                 }
@@ -160,7 +167,10 @@ public class PullToRefreshLayout extends FrameLayout {
                     mHeaderView.getLayoutParams().height = (int) dy;
                     ViewCompat.setTranslationY(mChildView, dy);
                     requestLayout();
-                    mHeaderView.refreshing(dy, mMaxHeaderHeight);
+                    if (mHeaderView instanceof OnViewHeightListener){
+                        mOnViewHeightListener = (OnViewHeightListener) mHeaderView;
+                        mOnViewHeightListener.onHeight(dy, mMaxHeaderHeight);
+                    }
                 } else {
                     if (canLoadMore) {
                         dy = Math.min(mMaxFooterHeight, Math.abs(dy));
@@ -168,7 +178,10 @@ public class PullToRefreshLayout extends FrameLayout {
                         mFooterView.getLayoutParams().height = (int) dy;
                         ViewCompat.setTranslationY(mChildView, -dy);
                         requestLayout();
-                        mFooterView.refreshing(dy, mMaxFooterHeight);
+                        if (mFooterView instanceof OnViewHeightListener){
+                            mOnViewHeightListener = (OnViewHeightListener) mFooterView;
+                            mOnViewHeightListener.onHeight(dy, mMaxFooterHeight);
+                        }
                     }
                 }
                 return true;
@@ -239,7 +252,10 @@ public class PullToRefreshLayout extends FrameLayout {
             public void onSuccess() {
                 mRefreshing = false;
                 Log.i(TAG, "onSuccess: ");
-                mHeaderView.end();
+                if (mHeaderView instanceof OnViewHeightListener){
+                    mOnViewHeightListener = (OnViewHeightListener) mHeaderView;
+                    mOnViewHeightListener.end();
+                }
             }
         });
     }
@@ -249,7 +265,10 @@ public class PullToRefreshLayout extends FrameLayout {
             @Override
             public void onSuccess() {
                 mLoading = false;
-                mFooterView.end();
+                if (mFooterView instanceof OnViewHeightListener){
+                    mOnViewHeightListener = (OnViewHeightListener) mFooterView;
+                    mOnViewHeightListener.end();
+                }
             }
         });
     }
@@ -265,11 +284,17 @@ public class PullToRefreshLayout extends FrameLayout {
                 if (state == REFRESH) {
                     mHeaderView.getLayoutParams().height = value;
                     ViewCompat.setTranslationY(mChildView, value);
-                    mHeaderView.refreshing(value, mMaxHeaderHeight);
+                    if (mHeaderView instanceof OnViewHeightListener){
+                        mOnViewHeightListener = (OnViewHeightListener) mHeaderView;
+                        mOnViewHeightListener.onHeight(value, mMaxHeaderHeight);
+                    }
                 } else {
                     mFooterView.getLayoutParams().height = value;
                     ViewCompat.setTranslationY(mChildView, -value);
-                    mFooterView.refreshing(value, mMaxFooterHeight);
+                    if (mFooterView instanceof OnViewHeightListener){
+                        mOnViewHeightListener = (OnViewHeightListener) mFooterView;
+                        mOnViewHeightListener.onHeight(value, mMaxHeaderHeight);
+                    }
                 }
                 if (value == endY) {
                     if (callBack != null) {
@@ -317,9 +342,6 @@ public class PullToRefreshLayout extends FrameLayout {
     }
 
     public interface OnRefreshListener {
-        /**
-         * Called when a swipe gesture triggers a refresh.
-         */
         void onRefresh();
     }
 
@@ -327,11 +349,25 @@ public class PullToRefreshLayout extends FrameLayout {
         void onLoadMore();
     }
 
-    public interface CallBack {
+    public interface OnViewHeightListener{
+        void begin();
+
+        /**
+         * 用来做刷新动画进度监听
+         *
+         * @param currentHeight //滑动高度
+         * @param maxHeight    //定义的最大滑动高度
+         */
+        void onHeight(float currentHeight, float maxHeight);
+
+        void end();
+    }
+
+    private interface CallBack {
         void onSuccess();
     }
 
-    public int dp2Px(Context context, float dp) {
+    private int dp2Px(Context context, float dp) {
         final float scale = context.getResources().getDisplayMetrics().density;
         return (int) (dp * scale + 0.5f);
     }
