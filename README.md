@@ -8,7 +8,7 @@
 
 
 ## Demo
-![默认HeaderViewAndFooterView](screenshots/默认HeaderViewAndFooterView.gif)
+![默认HeaderViewAndFooterView](screenshots/默认HeaderViewAndFooterView.gif) ![自定义HeaderViewAndFooterView](screenshots/自定义HeaderViewAndFooterView.gif)
 
 ## Usage
 
