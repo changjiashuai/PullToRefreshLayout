@@ -355,6 +355,9 @@ public class PullToRefreshLayout extends FrameLayout {
         mValueAnimator.start();
     }
 
+    /**
+     * 自动刷新
+     */
     public void autoRefresh() {
         if (canRefresh) {
             if (mHeaderView != null && mHeaderView instanceof PullToRefreshLayout.OnViewHeightListener) {
@@ -364,12 +367,18 @@ public class PullToRefreshLayout extends FrameLayout {
         }
     }
 
+    /**
+     * 结束刷新
+     */
     public void endRefresh() {
         if (mHeaderView != null && mHeaderView.getLayoutParams().height > 0 && mRefreshing) {
             endRefresh(mHeaderHeight);
         }
     }
 
+    /**
+     * 结束上拉加载
+     */
     public void endLoadMore() {
         if (mFooterView != null && mFooterView.getLayoutParams().height > 0 && mLoading) {
             endLoadMore(mFooterHeight);

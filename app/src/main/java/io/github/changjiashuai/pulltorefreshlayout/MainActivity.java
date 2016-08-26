@@ -5,6 +5,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,11 +33,12 @@ public class MainActivity extends AppCompatActivity {
         mAdapter = new StringAdapter(initData());
         mRecyclerView.setAdapter(mAdapter);
 
-//        View mHeaderView = LayoutInflater.from(this).inflate(R.layout.refresh_view, null);
-//        View mFooterView = LayoutInflater.from(this).inflate(R.layout.pull_view, null);
+        View mHeaderView = LayoutInflater.from(this).inflate(R.layout.refresh_view, null);
+        View mFooterView = LayoutInflater.from(this).inflate(R.layout.pull_view, null);
 
-//        mPullToRefreshLayout.setHeaderView(mHeaderView);
-//        mPullToRefreshLayout.setFooterView(mFooterView);
+        mPullToRefreshLayout.setHeaderView(mHeaderView);
+        mPullToRefreshLayout.setFooterView(mFooterView);
+
         mPullToRefreshLayout.setOnRefreshListener(new PullToRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
