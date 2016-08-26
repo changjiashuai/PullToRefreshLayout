@@ -177,7 +177,7 @@ public class PullToRefreshLayout extends FrameLayout {
                     //处理下拉
                     if (dy > 0 && !canChildScrollUp()) {//到达顶部而且到达可以刷新的下拉View最小的高度
                         //开始下拉刷新
-                        if (mHeaderView instanceof OnViewHeightListener){
+                        if (mHeaderView instanceof OnViewHeightListener) {
                             mOnViewHeightListener = (OnViewHeightListener) mHeaderView;
                             mOnViewHeightListener.begin();
                         }
@@ -188,7 +188,7 @@ public class PullToRefreshLayout extends FrameLayout {
                     //处理上拉
                     if (dy < 0 && !canChildScrollDown()) {//到达低部而且到达可以上拉加载View最小的高度
                         //开始上拉加载
-                        if (mFooterView instanceof OnViewHeightListener){
+                        if (mFooterView instanceof OnViewHeightListener) {
                             mOnViewHeightListener = (OnViewHeightListener) mFooterView;
                             mOnViewHeightListener.begin();
                         }
@@ -215,7 +215,7 @@ public class PullToRefreshLayout extends FrameLayout {
                     mHeaderView.getLayoutParams().height = (int) dy;
                     ViewCompat.setTranslationY(mChildView, dy);
                     requestLayout();
-                    if (mHeaderView instanceof OnViewHeightListener){
+                    if (mHeaderView instanceof OnViewHeightListener) {
                         mOnViewHeightListener = (OnViewHeightListener) mHeaderView;
                         mOnViewHeightListener.onHeight(dy, mMaxHeaderHeight);
                     }
@@ -226,7 +226,7 @@ public class PullToRefreshLayout extends FrameLayout {
                         mFooterView.getLayoutParams().height = (int) dy;
                         ViewCompat.setTranslationY(mChildView, -dy);
                         requestLayout();
-                        if (mFooterView instanceof OnViewHeightListener){
+                        if (mFooterView instanceof OnViewHeightListener) {
                             mOnViewHeightListener = (OnViewHeightListener) mFooterView;
                             mOnViewHeightListener.onHeight(dy, mMaxFooterHeight);
                         }
@@ -300,7 +300,7 @@ public class PullToRefreshLayout extends FrameLayout {
             public void onSuccess() {
                 mRefreshing = false;
                 Log.i(TAG, "onSuccess: ");
-                if (mHeaderView instanceof OnViewHeightListener){
+                if (mHeaderView instanceof OnViewHeightListener) {
                     mOnViewHeightListener = (OnViewHeightListener) mHeaderView;
                     mOnViewHeightListener.end();
                 }
@@ -313,7 +313,7 @@ public class PullToRefreshLayout extends FrameLayout {
             @Override
             public void onSuccess() {
                 mLoading = false;
-                if (mFooterView instanceof OnViewHeightListener){
+                if (mFooterView instanceof OnViewHeightListener) {
                     mOnViewHeightListener = (OnViewHeightListener) mFooterView;
                     mOnViewHeightListener.end();
                 }
@@ -332,14 +332,14 @@ public class PullToRefreshLayout extends FrameLayout {
                 if (state == REFRESH) {
                     mHeaderView.getLayoutParams().height = value;
                     ViewCompat.setTranslationY(mChildView, value);
-                    if (mHeaderView instanceof OnViewHeightListener){
+                    if (mHeaderView instanceof OnViewHeightListener) {
                         mOnViewHeightListener = (OnViewHeightListener) mHeaderView;
                         mOnViewHeightListener.onHeight(value, mMaxHeaderHeight);
                     }
                 } else {
                     mFooterView.getLayoutParams().height = value;
                     ViewCompat.setTranslationY(mChildView, -value);
-                    if (mFooterView instanceof OnViewHeightListener){
+                    if (mFooterView instanceof OnViewHeightListener) {
                         mOnViewHeightListener = (OnViewHeightListener) mFooterView;
                         mOnViewHeightListener.onHeight(value, mMaxHeaderHeight);
                     }
@@ -355,8 +355,10 @@ public class PullToRefreshLayout extends FrameLayout {
         mValueAnimator.start();
     }
 
-    public void autoRefresh(){
+    public void autoRefresh() {
+        if (canRefresh) {
             startRefresh(0, mHeaderHeight);
+        }
     }
 
     public void endRefresh() {
@@ -397,14 +399,14 @@ public class PullToRefreshLayout extends FrameLayout {
         void onLoadMore();
     }
 
-    public interface OnViewHeightListener{
+    public interface OnViewHeightListener {
         void begin();
 
         /**
          * 用来做刷新动画进度监听
          *
          * @param currentHeight //滑动高度
-         * @param maxHeight    //定义的最大滑动高度
+         * @param maxHeight     //定义的最大滑动高度
          */
         void onHeight(float currentHeight, float maxHeight);
 

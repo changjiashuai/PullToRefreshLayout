@@ -30,6 +30,8 @@ public class MainActivity extends AppCompatActivity {
         initData();
         StringAdapter mAdapter = new StringAdapter(mStrings);
         mRecyclerView.setAdapter(mAdapter);
+        mPullToRefreshLayout.setCanLoadMore(false);
+        mPullToRefreshLayout.setCanRefresh(false);
         mPullToRefreshLayout.setOnRefreshListener(new PullToRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
