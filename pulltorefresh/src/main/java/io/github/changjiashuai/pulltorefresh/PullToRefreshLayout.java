@@ -77,6 +77,54 @@ public class PullToRefreshLayout extends FrameLayout {
 //        }
     }
 
+    public void setCanRefresh(boolean canRefresh) {
+        this.canRefresh = canRefresh;
+    }
+
+    public boolean isCanRefresh() {
+        return canRefresh;
+    }
+
+    public void setCanLoadMore(boolean canLoadMore) {
+        this.canLoadMore = canLoadMore;
+    }
+
+    public boolean isCanLoadMore() {
+        return canLoadMore;
+    }
+
+    public void setHeaderView(View headerView) {
+        mHeaderView = headerView;
+    }
+
+    public View getHeaderView() {
+        return mHeaderView;
+    }
+
+    public void setFooterView(View footerView) {
+        mFooterView = footerView;
+    }
+
+    public View getFooterView() {
+        return mFooterView;
+    }
+
+    public void setHeaderHeight(int headerHeight) {
+        mHeaderHeight = headerHeight;
+    }
+
+    public int getHeaderHeight() {
+        return mHeaderHeight;
+    }
+
+    public void setFooterHeight(int footerHeight) {
+        mFooterHeight = footerHeight;
+    }
+
+    public int getFooterHeight() {
+        return mFooterHeight;
+    }
+
     @Override
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
