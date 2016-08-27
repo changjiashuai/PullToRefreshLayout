@@ -85,9 +85,9 @@ public class PullToRefreshLayout extends FrameLayout {
         LayoutInflater mInflater = (LayoutInflater)context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         mHeaderViewResId = a.getResourceId(R.styleable.PullToRefreshLayout_headerView,
-                R.layout.headerview);
+                R.layout.header_view);
         mFooterViewResId = a.getResourceId(R.styleable.PullToRefreshLayout_footerView,
-                R.layout.footerview);
+                R.layout.footer_view);
         a.recycle();
         mHeaderView = mInflater.inflate(mHeaderViewResId, this, false);
         mFooterView = mInflater.inflate(mFooterViewResId, this, false);
