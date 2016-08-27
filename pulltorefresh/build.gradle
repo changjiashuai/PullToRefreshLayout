@@ -1,4 +1,7 @@
 apply plugin: 'com.android.library'
+apply plugin: 'com.github.dcendents.android-maven'
+
+group='com.github.changjiashuai'
 
 android {
     compileSdkVersion 24
@@ -25,5 +28,4 @@ dependencies {
 }
 
 
-apply from: "../bintray.gradle"
-group='com.github.changjiashuai'
+//apply from: "../bintray.gradle"
