@@ -1,7 +1,7 @@
 # PullToRefreshLayout
 ===================
 
-[ ![Download](https://api.bintray.com/packages/changjiashuai/maven/pulltorefresh/images/download.svg) ](https://bintray.com/changjiashuai/maven/pulltorefresh/_latestVersion)
+[![](https://jitpack.io/v/changjiashuai/PullToRefreshLayout.svg)](https://jitpack.io/#changjiashuai/PullToRefreshLayout)
 
 > **Pull Refresh Layout Library , If you have any question or suggestion  with this library , welcome to tell me !**
 
@@ -22,9 +22,8 @@
 allprojects {
 	repositories {
 		...
-		 maven {
-                url "http://dl.bintray.com/changjiashuai/maven"
-         }
+		 
+		maven { url "https://jitpack.io" }
 	}
 }
 ```
@@ -35,11 +34,9 @@ allprojects {
 
 ```Gradle
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:24.2.0'
     ...
-    compile 'io.github.changjiashuai:pulltorefresh:1.0.0'
+    
+	compile 'com.github.changjiashuai:PullToRefreshLayout:v1.0.0'
     ...
 }
 ```
