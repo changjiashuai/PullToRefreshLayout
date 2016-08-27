@@ -1,7 +1,5 @@
 package io.github.changjiashuai.pulltorefresh;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
 import android.animation.ValueAnimator;
 import android.annotation.TargetApi;
 import android.content.Context;
@@ -140,23 +138,6 @@ public class FooterView extends View implements PullToRefreshLayout.OnViewHeight
                 }
 
                 invalidate();
-            }
-        });
-        valueAnimator.addListener(new AnimatorListenerAdapter() {
-            @Override
-            public void onAnimationEnd(Animator animation) {
-                super.onAnimationEnd(animation);
-
-            }
-
-            @Override
-            public void onAnimationStart(Animator animation) {
-                super.onAnimationStart(animation);
-            }
-
-            @Override
-            public void onAnimationRepeat(Animator animation) {
-                super.onAnimationRepeat(animation);
             }
         });
         if (!valueAnimator.isRunning()) {

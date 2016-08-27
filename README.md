@@ -37,7 +37,7 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:24.2.0'
     ...
-    compile 'io.github.changjiashuai:pulltorefresh:1.0.0'
+    compile 'io.github.changjiashuai:pulltorefresh:1.0.1'
     ...
 }
 ```
@@ -49,7 +49,7 @@ Add the PullToRefreshLayout to your layout:
 
 Simple 
 
-```java
+```xml
     <io.github.changjiashuai.pulltorefresh.PullToRefreshLayout
             android:id="@+id/pullToRefreshLayout"
             android:layout_width="match_parent"
@@ -60,6 +60,19 @@ Simple
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>
                 
+    </io.github.changjiashuai.pulltorefresh.PullToRefreshLayout>
+    
+    <!--app:headerView、app:footerView 设置布局视图-->
+    <io.github.changjiashuai.pulltorefresh.PullToRefreshLayout
+            android:id="@+id/pullToRefreshLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:headerView="@layout/refresh_view"
+            app:footerView="@layout/pull_view">
+        <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
     </io.github.changjiashuai.pulltorefresh.PullToRefreshLayout>
 ```
 

@@ -1,0 +1,6 @@
+<resources>
+    <declare-styleable name="PullToRefreshLayout">
+        <attr name="headerView" format="reference"/>
+        <attr name="footerView" format="reference"/>
+    </declare-styleable>
+</resources>

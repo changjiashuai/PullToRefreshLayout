@@ -1,7 +1,5 @@
 package io.github.changjiashuai.pulltorefresh;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
 import android.animation.ValueAnimator;
 import android.annotation.TargetApi;
 import android.content.Context;
@@ -27,7 +25,7 @@ public class HeaderView extends View implements PullToRefreshLayout.OnViewHeight
     private RectF rectF;
 
     private float mWidth = 0f;
-    private float mHigh = 0f;
+    private float mHeight = 0f;
     private float mPadding = 5f;
 
     private float eatErWidth = 60f;
@@ -65,7 +63,7 @@ public class HeaderView extends View implements PullToRefreshLayout.OnViewHeight
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
 
         mWidth = getMeasuredWidth();
-        mHigh = getMeasuredHeight();
+        mHeight = getMeasuredHeight();
     }
 
     private void initPaint() {
@@ -87,13 +85,13 @@ public class HeaderView extends View implements PullToRefreshLayout.OnViewHeight
         super.onDraw(canvas);
         float eatRightX = mPadding + eatErWidth + eatErPositonX;
         rectF.left = mPadding + eatErPositonX;
-        rectF.top = mHigh / 2 - eatErWidth / 2;
+        rectF.top = mHeight / 2 - eatErWidth / 2;
         rectF.right = eatRightX;
-        rectF.bottom = mHigh / 2 + eatErWidth / 2;
+        rectF.bottom = mHeight / 2 + eatErWidth / 2;
         canvas.drawArc(rectF, eatErStrtAngle, eatErEndAngle, true, mPaint);//第三个参数是否显示半径
 
         canvas.drawCircle(mPadding + eatErPositonX + eatErWidth / 2,
-                mHigh / 2 - eatErWidth / 4,
+                mHeight / 2 - eatErWidth / 4,
                 beansWidth / 2, mPaintEye);
 
         int beansCount = (int) ((mWidth - mPadding * 2 - eatErWidth) / beansWidth / 2);
@@ -102,7 +100,7 @@ public class HeaderView extends View implements PullToRefreshLayout.OnViewHeight
             float x = beansCount * i + beansWidth / 2 + mPadding + eatErWidth;
             if (x > eatRightX) {
                 canvas.drawCircle(x,
-                        mHigh / 2, beansWidth / 2, mPaint);
+                        mHeight / 2, beansWidth / 2, mPaint);
             }
         }
 
@@ -142,26 +140,8 @@ public class HeaderView extends View implements PullToRefreshLayout.OnViewHeight
                 invalidate();
             }
         });
-        valueAnimator.addListener(new AnimatorListenerAdapter() {
-            @Override
-            public void onAnimationEnd(Animator animation) {
-                super.onAnimationEnd(animation);
-
-            }
-
-            @Override
-            public void onAnimationStart(Animator animation) {
-                super.onAnimationStart(animation);
-            }
-
-            @Override
-            public void onAnimationRepeat(Animator animation) {
-                super.onAnimationRepeat(animation);
-            }
-        });
         if (!valueAnimator.isRunning()) {
             valueAnimator.start();
-
         }
 
         return valueAnimator;

@@ -3,15 +3,19 @@ package io.github.changjiashuai.pulltorefresh;
 import android.animation.ValueAnimator;
 import android.annotation.TargetApi;
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.os.Build;
 import android.support.v4.view.ViewCompat;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+
+import io.github.changjiashuai.pulltorefreshlayout.R;
 
 /**
  * Email: changjiashuai@gmail.com
@@ -40,6 +44,9 @@ public class PullToRefreshLayout extends FrameLayout {
     private float mCurrentY;
     private float mTouchY;
 
+    private int mHeaderViewResId;
+    private int mFooterViewResId;
+
     public void setOnRefreshListener(OnRefreshListener onRefreshListener) {
         mOnRefreshListener = onRefreshListener;
     }
@@ -63,14 +70,28 @@ public class PullToRefreshLayout extends FrameLayout {
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     public PullToRefreshLayout(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
-        init();
+        init(context, attrs, defStyleRes);
     }
 
-    private void init() {
-        mHeaderHeight = dp2Px(getContext(), mHeaderHeight);
-        mFooterHeight = dp2Px(getContext(), mFooterHeight);
+    private void init(Context context, AttributeSet attrs, int defStyleRes) {
+        mHeaderHeight = dp2Px(context, mHeaderHeight);
+        mFooterHeight = dp2Px(context, mFooterHeight);
         mMaxHeaderHeight = 2 * mHeaderHeight;
         mMaxFooterHeight = 2 * mFooterHeight;
+
+        final TypedArray a = context.obtainStyledAttributes(
+                attrs, R.styleable.PullToRefreshLayout, defStyleRes, 0);
+
+        LayoutInflater mInflater = (LayoutInflater)context
+                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        mHeaderViewResId = a.getResourceId(R.styleable.PullToRefreshLayout_headerView,
+                R.layout.headerview);
+        mFooterViewResId = a.getResourceId(R.styleable.PullToRefreshLayout_footerView,
+                R.layout.footerview);
+        a.recycle();
+        mHeaderView = mInflater.inflate(mHeaderViewResId, this, false);
+        mFooterView = mInflater.inflate(mFooterViewResId, this, false);
+
         Log.i("TAG", "init: childCount=" + getChildCount());
 //        if (getChildCount() != 1) {
 //            throw new IllegalArgumentException("child only can be one!");
@@ -360,6 +381,7 @@ public class PullToRefreshLayout extends FrameLayout {
      */
     public void autoRefresh() {
         if (canRefresh) {
+            Log.i(TAG, "autoRefresh: mHeaderView"+mHeaderView);
             if (mHeaderView != null && mHeaderView instanceof PullToRefreshLayout.OnViewHeightListener) {
                 ((OnViewHeightListener) mHeaderView).begin();//开始动画
             }
