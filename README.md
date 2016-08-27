@@ -1,6 +1,8 @@
 # PullToRefreshLayout
 ===================
 
+[ ![Download](https://api.bintray.com/packages/changjiashuai/maven/pulltorefresh/images/download.svg) ](https://bintray.com/changjiashuai/maven/pulltorefresh/_latestVersion)
+
 > **Pull Refresh Layout Library , If you have any question or suggestion  with this library , welcome to tell me !**
 
 ## Introduction
@@ -37,7 +39,7 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:24.2.0'
     ...
-    compile 'io.github.changjiashuai:pulltorefresh:1.0.1'
+    compile 'io.github.changjiashuai:pulltorefresh:1.0.0'
     ...
 }
 ```
