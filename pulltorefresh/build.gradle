@@ -26,3 +26,4 @@ dependencies {
 
 
 apply from: "../bintray.gradle"
+group='com.github.changjiashuai'
