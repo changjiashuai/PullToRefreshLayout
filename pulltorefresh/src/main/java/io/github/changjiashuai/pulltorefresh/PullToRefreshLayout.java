@@ -1,10 +1,8 @@
 package io.github.changjiashuai.pulltorefresh;
 
 import android.animation.ValueAnimator;
-import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.os.Build;
 import android.support.v4.view.ViewCompat;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -14,7 +12,6 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
-
 import io.github.changjiashuai.pulltorefreshlayout.R;
 
 /**
@@ -60,27 +57,28 @@ public class PullToRefreshLayout extends FrameLayout {
     }
 
     public PullToRefreshLayout(Context context, AttributeSet attrs) {
-        this(context, attrs, 0);
+        super(context, attrs);
+        init(context, attrs);
     }
 
-    public PullToRefreshLayout(Context context, AttributeSet attrs, int defStyleAttr) {
-        this(context, attrs, defStyleAttr, 0);
-    }
+    //public PullToRefreshLayout(Context context, AttributeSet attrs, int defStyleAttr) {
+    //    super(context, attrs, defStyleAttr);
+    //    init(context, attrs);
+    //}
 
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    public PullToRefreshLayout(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
-        super(context, attrs, defStyleAttr, defStyleRes);
-        init(context, attrs, defStyleRes);
-    }
+    //@TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    //public PullToRefreshLayout(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    //    super(context, attrs, defStyleAttr, defStyleRes);
+    //    init(context, attrs, defStyleRes);
+    //}
 
-    private void init(Context context, AttributeSet attrs, int defStyleRes) {
+    private void init(Context context, AttributeSet attrs) {
         mHeaderHeight = dp2Px(context, mHeaderHeight);
         mFooterHeight = dp2Px(context, mFooterHeight);
         mMaxHeaderHeight = 2 * mHeaderHeight;
         mMaxFooterHeight = 2 * mFooterHeight;
-
         final TypedArray a = context.obtainStyledAttributes(
-                attrs, R.styleable.PullToRefreshLayout, defStyleRes, 0);
+                attrs, R.styleable.PullToRefreshLayout);
 
         LayoutInflater mInflater = (LayoutInflater)context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
