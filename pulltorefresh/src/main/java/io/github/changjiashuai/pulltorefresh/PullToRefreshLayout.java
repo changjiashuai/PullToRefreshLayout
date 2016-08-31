@@ -61,17 +61,6 @@ public class PullToRefreshLayout extends FrameLayout {
         init(context, attrs);
     }
 
-    //public PullToRefreshLayout(Context context, AttributeSet attrs, int defStyleAttr) {
-    //    super(context, attrs, defStyleAttr);
-    //    init(context, attrs);
-    //}
-
-    //@TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    //public PullToRefreshLayout(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
-    //    super(context, attrs, defStyleAttr, defStyleRes);
-    //    init(context, attrs, defStyleRes);
-    //}
-
     private void init(Context context, AttributeSet attrs) {
         mHeaderHeight = dp2Px(context, mHeaderHeight);
         mFooterHeight = dp2Px(context, mFooterHeight);
