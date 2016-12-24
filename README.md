@@ -36,7 +36,7 @@ allprojects {
 dependencies {
     ...
     
-	compile 'com.github.changjiashuai:PullToRefreshLayout:v1.0.1'
+	compile 'com.github.changjiashuai:PullToRefreshLayout:$lastversion'
     ...
 }
 ```
